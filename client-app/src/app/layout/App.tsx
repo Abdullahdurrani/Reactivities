@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
-import users from '../../assets/users.svg';
 import { Activity } from '../models/Activity';
 import NavBar from './NavBar';
+import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 
 function App() {
 
@@ -23,17 +23,7 @@ function App() {
       <NavBar />
 
       <div className='container mt-4'>
-
-        <ul className='list-group'>
-
-          {activities.map(activity => (
-            <li className='list-group-item' key={activity.id}>
-              {activity.title}
-            </li>
-          ))}
-
-        </ul>
-
+        <ActivityDashboard activities={activities} />
       </div>
 
     </>
