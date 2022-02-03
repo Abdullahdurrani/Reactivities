@@ -3,9 +3,10 @@ import { Activity } from "../../../app/models/Activity";
 
 interface Props {
     activity: Activity;
+    handleCancelSelectedActivity: () => void;
 }
 
-export default function ActivityDetails({ activity }: Props) {
+export default function ActivityDetails({ activity, handleCancelSelectedActivity }: Props) {
     return (
             <div className="card" style={{ width: "24rem" }} >
                 <img className="card-img-top" src={require(`../../../assets/categoryImages/${activity.category}.jpg`)} alt="image" />
@@ -15,7 +16,8 @@ export default function ActivityDetails({ activity }: Props) {
                 </div>
                 <div className="card-body d-flex">
                     <a href="#" className="btn btn-outline-primary flex-fill">Edit</a>
-                    <a href="#" className="btn btn-outline-secondary flex-fill">Cancel</a>
+                    {/* because we dont use parameters it will wait for click event */}
+                    <a href="#" onClick={handleCancelSelectedActivity} className="btn btn-outline-secondary flex-fill">Cancel</a>
                 </div>
             </div>
     )
