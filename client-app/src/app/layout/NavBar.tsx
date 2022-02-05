@@ -1,7 +1,11 @@
 import React from "react";
 import Logo from '../../assets/logo.png'
 
-export default function NavBar() {
+interface Props {
+    handleFormOpen: () => void;
+}
+
+export default function NavBar({handleFormOpen}: Props) {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-info ">
@@ -17,7 +21,7 @@ export default function NavBar() {
                             <a className="nav-link text-white" href="#Activities">Activities</a>
                         </li>
                         <li className="nav-item ms-3">
-                            <button type="button" className="btn btn-secondary">Create Activity</button>
+                            <button onClick={handleFormOpen} type="button" className="btn btn-secondary">Create Activity</button>
                         </li>
                     </ul>
                 </div>
