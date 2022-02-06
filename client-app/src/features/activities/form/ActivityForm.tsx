@@ -22,6 +22,8 @@ export default function ActivityForm({activity: selectedActivity, handleFormClos
         venue: ''
     }
 
+    // type Obj = typeof initialState;
+
     const [activity, setActivity] = useState(initialState);
 
     function handleSubmit() {
@@ -40,6 +42,11 @@ export default function ActivityForm({activity: selectedActivity, handleFormClos
     function handleInput(key: string, value: any) {
         setActivity(activity => ({...activity, [key]: value}));
     }
+
+    // OR third approach with typed safety
+    // function handleChange<TKey extends keyof Obj>(key: TKey, value: Obj[TKey]) {
+    //     setActivity(activity => ({...activity, [key]: value}));
+    // }
     
     return (
         <div className="p-3 border mt-2" style={{ width: "24rem" }}>
@@ -55,7 +62,7 @@ export default function ActivityForm({activity: selectedActivity, handleFormClos
                     <input type="text" placeholder="Category" className="form-control" name="category" value={activity.category} onChange={handleInputChange} />
                 </div>
                 <div className="mb-3">
-                    <input type="text" placeholder="Date" className="form-control" name="date" value={activity.date} onChange={handleInputChange} />
+                    <input type="date" placeholder="Date" className="form-control" value={activity.date}  onChange={(e) => handleInput("date", e.target.value)} />
                 </div>
                 <div className="mb-3">
                     <input type="text" placeholder="Venue" className="form-control" value={activity.venue} onChange={(e) => handleInput("venue", e.target.value)} />

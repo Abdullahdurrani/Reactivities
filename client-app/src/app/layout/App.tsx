@@ -1,9 +1,9 @@
-import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Activity } from '../models/Activity';
 import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
-import {v4 as uuid} from 'uuid';
+import { v4 as uuid } from 'uuid';
+import agent from '../api/agent';
 
 function App() {
 
@@ -19,8 +19,16 @@ function App() {
   // gets a response from api and if it is successful, it populates the activities array
   // an empty array parameter is used to run it only once
   useEffect(() => {
-    axios.get<Activity[]>('http://localhost:5000/api/activities').then(response => {
-      setActivities(response.data);
+    // agent contains Activites which contains a list object which returns data, if Promise is resolved then method is executed which populates the activities array
+    agent.Activities.list().then(response => {
+      let activities: Activity[] = [];
+      response.forEach(activity => {
+        // splits the date and omits out the time part(only left with date part)
+        activity.date = activity.date.split('T')[0];
+        // activity object is from response.data array and is put into activities array after getting date split
+        activities.push(activity);
+      })
+      setActivities(activities);
     })
   }, [])
 
@@ -53,7 +61,7 @@ function App() {
   function handleCreateOrEditActivity(activity: Activity) {
     activity.id
       ? setActivities([...activities.filter(x => x.id !== activity.id), activity])
-      : setActivities([...activities, {...activity, id: uuid()}]);
+      : setActivities([...activities, { ...activity, id: uuid() }]);
     // this closes the form
     setEditMode(false);
     // this shows the details tab
@@ -79,8 +87,8 @@ function App() {
           editMode={editMode}
           handleFormOpen={handleFormOpen}
           handleFormClose={handleFormClose}
-          handleCreateOrEditActivity = {handleCreateOrEditActivity}
-          handleDeleteActivity = {handleDeleteActivity}
+          handleCreateOrEditActivity={handleCreateOrEditActivity}
+          handleDeleteActivity={handleDeleteActivity}
         />
       </div>
 
