@@ -1,8 +1,28 @@
 import { Activity } from './../models/Activity';
 import axios, { AxiosResponse } from "axios";
 
+// this adds the sepecified delay to components
+const sleep = (delay: number ) => {
+    // returns a Promise which on resolve runs setTimeout
+    return new Promise((resolve) => {
+        // resolve is to be executed after the delay expires.
+        setTimeout(resolve, delay);
+    })
+}
+
 // default url for every request 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+
+// intercepts the response before it is handled
+axios.interceptors.response.use(async response => {
+    try {
+        await sleep(300);
+        return response;
+    } catch (error) {
+        console.log(error);
+        return await Promise.reject(error);
+    }
+})
 
 // the data from api is in response.data
 // arrow function which takes response(of type AxiosResponse) as parameter and returns response.data

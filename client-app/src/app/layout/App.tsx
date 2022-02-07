@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { v4 as uuid } from 'uuid';
 import agent from '../api/agent';
+import LoadingComponent from './LoadingComponent';
 
 function App() {
 
@@ -15,6 +16,9 @@ function App() {
 
   // to handle the edit/create form show/hide
   const [editMode, setEditMode] = useState(false);
+
+  // handles loading indicator
+  const [loading, setLoading] = useState(true);
 
   // gets a response from api and if it is successful, it populates the activities array
   // an empty array parameter is used to run it only once
@@ -29,6 +33,8 @@ function App() {
         activities.push(activity);
       })
       setActivities(activities);
+      // after getting data from api loading is set to false
+      setLoading(false);
     })
   }, [])
 
@@ -73,6 +79,9 @@ function App() {
     setActivities([...activities.filter(x => x.id !== id)]);
   }
 
+  // on page start loading is true so LoadingComponent is returned
+  if (loading) return <LoadingComponent />
+  
   return (
     <>
 
