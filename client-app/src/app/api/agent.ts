@@ -42,7 +42,12 @@ const requests = {
 // object which stores the data from requests
 const Activities = {
     // get method returns data in list, here / refers to baseUrl
-    list: () => requests.get<Activity[]>('/activities')
+    list: () => requests.get<Activity[]>('/activities'),
+    details: (id: string) => requests.get<Activity>(`/activities/${id}`),
+    create: (activity: Activity) => axios.post<void>(`/activities`, activity),
+    // takes activity from client-app, and requests to api controller with id in route and activity in body of request
+    update: (activity: Activity) => axios.put<void>(`/activities/${activity.id}`, activity),
+    delete: (id: string) => requests.del<void>(`/activities/${id}`)
 }
 
 // because there can be different models than Activity so we store it in an object and export that object
