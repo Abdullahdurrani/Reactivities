@@ -1,20 +1,10 @@
+import { observer } from "mobx-react-lite";
 import React, { ChangeEvent, FormEvent, useState } from "react";
-import { Activity } from "../../../app/models/Activity";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-	activity: Activity | undefined;
-	handleFormClose: () => void;
-	handleCreateOrEditActivity: (activity: Activity) => void;
-	submitting: boolean;
-}
-
-// activity: selectedActivity means reference activity as selectedActivity
-export default function ActivityForm({
-	activity: selectedActivity,
-	handleFormClose,
-	handleCreateOrEditActivity,
-	submitting,
-}: Props) {
+export default observer(function ActivityForm() {
+	const { activityStore } = useStore();
+	const { selectedActivity, closeForm, createActivity, updateActivity, loading } = activityStore;
 	// on edit activity will be populated and assigned to initialState
 	// otherwise initialize it with the following fields
 	const initialState = selectedActivity ?? {
@@ -27,13 +17,11 @@ export default function ActivityForm({
 		venue: "",
 	};
 
-	// type Obj = typeof initialState;
-
 	const [activity, setActivity] = useState(initialState);
 
 	function handleSubmit(e: FormEvent) {
 		e.preventDefault();
-		handleCreateOrEditActivity(activity);
+		activity.id ? updateActivity(activity) : createActivity(activity);
 	}
 
 	// event can be of input or textarea
@@ -109,7 +97,7 @@ export default function ActivityForm({
 				<div className="d-flex justify-content-end">
 					<button type="submit" className="btn btn-primary me-2">
 						Submit
-						{submitting && (
+						{loading && (
 							<span
 								className="spinner-border spinner-border-sm ms-2"
 								role="status"
@@ -117,11 +105,11 @@ export default function ActivityForm({
 							></span>
 						)}
 					</button>
-					<button onClick={handleFormClose} type="button" className="btn btn-secondary">
+					<button onClick={closeForm} type="button" className="btn btn-secondary">
 						Cancel
 					</button>
 				</div>
 			</form>
 		</div>
 	);
-}
+});

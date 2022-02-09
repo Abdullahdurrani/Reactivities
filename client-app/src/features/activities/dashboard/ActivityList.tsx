@@ -1,29 +1,20 @@
+import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useState } from "react";
-import { Activity } from "../../../app/models/Activity";
+import { useStore } from "../../../app/stores/store";
 
-interface Props {
-	activities: Activity[];
-	handleSelectActivity: (id: string) => void;
-	handleDeleteActivity: (id: string) => void;
-	submitting: boolean;
-}
-
-export default function ActivityList({
-	activities,
-	handleSelectActivity,
-	handleDeleteActivity,
-	submitting,
-}: Props) {
+export default observer(function ActivityList() {
+	const { activityStore } = useStore();
+	const { selectActivity, deleteActivity, activitiesArray, loading } = activityStore;
 	// contains the name of the button clicked
 	const [target, setTarget] = useState("");
 
 	function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
 		setTarget(e.currentTarget.name);
-		handleDeleteActivity(id);
+		deleteActivity(id);
 	}
 	return (
 		<div>
-			{activities.map((activity) => (
+			{activitiesArray.map((activity) => (
 				<div key={activity.id} className="card">
 					<h5 className="card-header">{activity.title}</h5>
 
@@ -40,7 +31,7 @@ export default function ActivityList({
 							<div>
 								{/* onclick contains arrow function because as soon as button renders it will try to execute it without clicking. arrow func makes sure it only executes when it is clicked  */}
 								<button
-									onClick={() => handleSelectActivity(activity.id)}
+									onClick={() => selectActivity(activity.id)}
 									type="button"
 									className="btn btn-primary me-2"
 								>
@@ -53,7 +44,7 @@ export default function ActivityList({
 									className="btn btn-danger"
 								>
 									Delete
-									{submitting && target === activity.id && (
+									{loading && target === activity.id && (
 										<span
 											className="spinner-border spinner-border-sm ms-2"
 											role="status"
@@ -68,4 +59,4 @@ export default function ActivityList({
 			))}
 		</div>
 	);
-}
+});
