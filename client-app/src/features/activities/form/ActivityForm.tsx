@@ -1,27 +1,45 @@
-import { observer } from "mobx-react-lite";
-import React, { ChangeEvent, FormEvent, useState } from "react";
-import { useStore } from "../../../app/stores/store";
+import { observer } from 'mobx-react-lite';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { useStore } from '../../../app/stores/store';
+import { v4 as uuid } from 'uuid';
 
-export default observer(function ActivityForm() {
+function ActivityForm() {
+	const history = useHistory();
 	const { activityStore } = useStore();
-	const { selectedActivity, closeForm, createActivity, updateActivity, loading } = activityStore;
-	// on edit activity will be populated and assigned to initialState
-	// otherwise initialize it with the following fields
-	const initialState = selectedActivity ?? {
-		id: "",
-		title: "",
-		description: "",
-		category: "",
-		date: "",
-		city: "",
-		venue: "",
-	};
+	const { createActivity, updateActivity, loading, loadActivity, loadingInitial } = activityStore;
+	const { id } = useParams<{ id: string }>();
 
-	const [activity, setActivity] = useState(initialState);
+	const [activity, setActivity] = useState({
+		id: '',
+		title: '',
+		category: '',
+		description: '',
+		date: '',
+		city: '',
+		venue: '',
+	});
+
+	// to check if there is an id passed in param
+	// if there is loadActivity(from memory or api) setActivity then
+	// if id is null activity is already populated in useState with initial fields
+	useEffect(() => {
+		if (id) loadActivity(id).then((activity) => setActivity(activity!));
+	}, [id, loadActivity]);
 
 	function handleSubmit(e: FormEvent) {
+		// disables auto re renders
 		e.preventDefault();
-		activity.id ? updateActivity(activity) : createActivity(activity);
+		if (activity.id.length === 0) {
+			let newActivity = {
+				...activity,
+				id: uuid(),
+			};
+			createActivity(newActivity).then(() => history.push(`/activities/${newActivity.id}`));
+		} else {
+			updateActivity(activity).then(() => history.push(`/activities/${activity.id}`));
+		}
 	}
 
 	// event can be of input or textarea
@@ -42,74 +60,79 @@ export default observer(function ActivityForm() {
 	//     setActivity(activity => ({...activity, [key]: value}));
 	// }
 
+	if (loadingInitial) return <LoadingComponent content='Loading activity' />;
+
 	return (
-		<div className="p-3 border mt-2" style={{ width: "24rem" }}>
-			<form onSubmit={handleSubmit} autoComplete="off" className="me-4 mt-2">
-				<div className="mb-3">
+		<div className='p-3 border mt-2' style={{ width: '24rem' }}>
+			<form onSubmit={handleSubmit} autoComplete='off' className='me-4 mt-2'>
+				<div className='mb-3'>
 					{/* onchange changes the value of title property and that changed property is put into value */}
 					<input
-						type="text"
-						placeholder="Title"
-						className="form-control"
-						name="title"
+						type='text'
+						placeholder='Title'
+						className='form-control'
+						name='title'
 						value={activity.title}
 						onChange={handleInputChange}
 					/>
 				</div>
-				<div className="mb-3">
+				<div className='mb-3'>
 					<textarea
-						placeholder="Description"
-						className="form-control"
+						placeholder='Description'
+						className='form-control'
 						rows={3}
-						name="description"
+						name='description'
 						value={activity.description}
 						onChange={handleInputChange}
 					/>
 				</div>
-				<div className="mb-3">
+				<div className='mb-3'>
 					<input
-						type="text"
-						placeholder="Category"
-						className="form-control"
-						name="category"
+						type='text'
+						placeholder='Category'
+						className='form-control'
+						name='category'
 						value={activity.category}
 						onChange={handleInputChange}
 					/>
 				</div>
-				<div className="mb-3">
+				<div className='mb-3'>
 					<input
-						type="date"
-						placeholder="Date"
-						className="form-control"
+						type='date'
+						placeholder='Date'
+						className='form-control'
 						value={activity.date}
-						onChange={(e) => handleInput("date", e.target.value)}
+						onChange={(e) => handleInput('date', e.target.value)}
 					/>
 				</div>
-				<div className="mb-3">
+				<div className='mb-3'>
 					<input
-						type="text"
-						placeholder="Venue"
-						className="form-control"
+						type='text'
+						placeholder='Venue'
+						className='form-control'
 						value={activity.venue}
-						onChange={(e) => handleInput("venue", e.target.value)}
+						onChange={(e) => handleInput('venue', e.target.value)}
 					/>
 				</div>
-				<div className="d-flex justify-content-end">
-					<button type="submit" className="btn btn-primary me-2">
+				<div className='d-flex justify-content-end'>
+					<button type='submit' className='btn btn-primary me-2'>
 						Submit
 						{loading && (
 							<span
-								className="spinner-border spinner-border-sm ms-2"
-								role="status"
-								aria-hidden="true"
+								className='spinner-border spinner-border-sm ms-2'
+								role='status'
+								aria-hidden='true'
 							></span>
 						)}
 					</button>
-					<button onClick={closeForm} type="button" className="btn btn-secondary">
-						Cancel
-					</button>
+					<NavLink to='/activities'>
+						<button type='button' className='btn btn-secondary'>
+							Cancel
+						</button>
+					</NavLink>
 				</div>
 			</form>
 		</div>
 	);
-});
+}
+export default observer(ActivityForm);

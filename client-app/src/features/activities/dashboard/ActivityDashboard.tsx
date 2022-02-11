@@ -1,26 +1,29 @@
-import React from "react";
-import ActivityList from "./ActivityList";
-import ActivityDetails from "../details/ActivityDetails";
-import ActivityForm from "../form/ActivityForm";
-import { useStore } from "../../../app/stores/store";
-import { observer } from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
+import React, { useEffect } from 'react';
+import LoadingComponent from '../../../app/layout/LoadingComponent';
+import { useStore } from '../../../app/stores/store';
+import ActivityList from './ActivityList';
 
 export default observer(function ActivityDashboard() {
 	const { activityStore } = useStore();
-	const { editMode, selectedActivity } = activityStore;
+	const { loadActivities, activityRegistry } = activityStore;
+
+	useEffect(() => {
+		// to stop api request on going to dashboard every time
+		if (activityRegistry.size <= 1) loadActivities();
+	}, [activityRegistry.size, loadActivities]);
+
+	// on page start loading is true so LoadingComponent is returned
+	if (activityStore.loadingInitial) return <LoadingComponent />;
 
 	return (
-		<div className="row">
-			<div className="col-8">
+		<div className='row'>
+			<div className='col-8'>
 				{/* contains View button which executes the handleSelectActivity function which in return sets the selectedActivity state */}
 				<ActivityList />
 			</div>
-			<div className="col-4">
-				{/* selectedActivity is used to show the details of activity which was clicked, handleCancelSelectedActivity is used to cancel viewing details, handleFormOpen to edit activity */}
-				{/* if in editMode then hide details, only shows if there is selectedActivity and editMode is false */}
-				{selectedActivity && !editMode && <ActivityDetails />}
-				{/* only show form if in editMode */}
-				{editMode && <ActivityForm />}
+			<div className='col-4'>
+				<h2>Activity Filter</h2>
 			</div>
 		</div>
 	);

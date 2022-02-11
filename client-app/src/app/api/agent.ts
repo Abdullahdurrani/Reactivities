@@ -1,7 +1,7 @@
 import { Activity } from './../models/Activity';
 import axios, { AxiosResponse } from "axios";
 
-// this adds the sepecified delay to components
+// this adds the specified delay to components
 const sleep = (delay: number ) => {
     // returns a Promise which on resolve runs setTimeout
     return new Promise((resolve) => {

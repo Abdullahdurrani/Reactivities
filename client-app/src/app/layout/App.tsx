@@ -1,26 +1,36 @@
-import React, { useEffect } from "react";
-import NavBar from "./NavBar";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
-import LoadingComponent from "./LoadingComponent";
-import { useStore } from "../stores/store";
-import { observer } from "mobx-react-lite";
+import { observer } from 'mobx-react-lite';
+import React from 'react';
+import { Route, useLocation } from 'react-router-dom';
+import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
+import ActivityDetails from '../../features/activities/details/ActivityDetails';
+import ActivityForm from '../../features/activities/form/ActivityForm';
+import HomePage from '../../features/home/HomePage';
+import NavBar from './NavBar';
 
 function App() {
-	const { activityStore } = useStore();
-
-	useEffect(() => {
-		activityStore.loadActivities();
-	}, [activityStore]);
-
-	// on page start loading is true so LoadingComponent is returned
-	if (activityStore.loadingIntitial) return <LoadingComponent />;
-
+	// from edit to create doesn't clear the fields this makes sure that those fields are cleared
+	const location = useLocation();
 	return (
 		<>
-			<NavBar />
-			<div className="container mt-4">
-				<ActivityDashboard />
-			</div>
+			<Route exact path={'/'} component={HomePage} />
+			<Route
+				path={'/(.+)'}
+				render={() => (
+					<>
+						<NavBar />
+						<div className='container mt-4'>
+							<Route exact path={'/activities'} component={ActivityDashboard} />
+							<Route exact path={'/activities/:id'} component={ActivityDetails} />
+							<Route
+								exact
+								key={location.key}
+								path={['/createActivity', '/manage/:id']}
+								component={ActivityForm}
+							/>
+						</div>
+					</>
+				)}
+			/>
 		</>
 	);
 }

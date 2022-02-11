@@ -1,35 +1,32 @@
-import React from "react";
-import Logo from "../../assets/logo.png";
-import { useStore } from "../stores/store";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import Logo from '../../assets/logo.png';
 
 export default function NavBar() {
-	const { activityStore } = useStore();
 	return (
 		<div>
-			<nav className="navbar navbar-expand-lg navbar-dark bg-info ">
-				<div className="container">
-					<ul className="nav ">
-						<li className="nav-item ms-3">
-							<img src={Logo} width={40} alt="logo" />
+			<nav className='navbar navbar-expand-lg navbar-dark bg-info '>
+				<div className='container'>
+					<ul className='nav'>
+						<li className='nav-item ms-3'>
+							<img src={Logo} width={40} alt='logo' />
 						</li>
-						<li className="nav-item">
-							<a className="nav-link text-white navbar-brand" href="#Reactivities">
+						<li className='nav-item'>
+							<NavLink exact to='/' className='nav-link text-white navbar-brand'>
 								Reactivities
-							</a>
+							</NavLink>
 						</li>
-						<li className="nav-item">
-							<a className="nav-link text-white" href="#Activities">
-								Activities
-							</a>
+						<li className='nav-item'>
+							<NavLink to='/activities' className='nav-link text-white'>
+								Reactivities
+							</NavLink>
 						</li>
-						<li className="nav-item ms-3">
-							<button
-								onClick={() => activityStore.openForm()}
-								type="button"
-								className="btn btn-secondary"
-							>
-								Create Activity
-							</button>
+						<li className='nav-item ms-3'>
+							<NavLink exact to='/createActivity'>
+								<button type='button' className='btn btn-secondary'>
+									Create Activity
+								</button>
+							</NavLink>
 						</li>
 					</ul>
 				</div>

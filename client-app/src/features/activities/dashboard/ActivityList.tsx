@@ -1,10 +1,11 @@
 import { observer } from "mobx-react-lite";
 import React, { SyntheticEvent, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { useStore } from "../../../app/stores/store";
 
 export default observer(function ActivityList() {
 	const { activityStore } = useStore();
-	const { selectActivity, deleteActivity, activitiesArray, loading } = activityStore;
+	const { deleteActivity, activitiesArray, loading } = activityStore;
 	// contains the name of the button clicked
 	const [target, setTarget] = useState("");
 
@@ -29,14 +30,12 @@ export default observer(function ActivityList() {
 								<span className="badge bg-secondary">{activity.category}</span>
 							</h4>
 							<div>
-								{/* onclick contains arrow function because as soon as button renders it will try to execute it without clicking. arrow func makes sure it only executes when it is clicked  */}
-								<button
-									onClick={() => selectActivity(activity.id)}
-									type="button"
-									className="btn btn-primary me-2"
-								>
-									View
-								</button>
+								<NavLink to={`/activities/${activity.id}`}>
+									{/* onclick contains arrow function because as soon as button renders it will try to execute it without clicking. arrow func makes sure it only executes when it is clicked  */}
+									<button type="button" className="btn btn-primary me-2">
+										View
+									</button>
+								</NavLink>
 								<button
 									name={activity.id}
 									onClick={(e) => handleActivityDelete(e, activity.id)}
