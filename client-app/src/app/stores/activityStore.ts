@@ -2,7 +2,6 @@ import { Activity } from './../models/Activity';
 import { makeAutoObservable, runInAction } from 'mobx';
 import agent from '../api/agent';
 
-
 export default class ActivityStore {
 	activityRegistry = new Map<string, Activity>();
 	selectedActivity: Activity | undefined = undefined;
@@ -16,7 +15,27 @@ export default class ActivityStore {
 	}
 
 	get activitiesArray() {
-		return Array.from(this.activityRegistry.values());
+		// sorted array
+		return Array.from(this.activityRegistry.values()).sort(
+			(a, b) => Date.parse(a.date) - Date.parse(b.date)
+		);
+	}
+
+	get groupedActivities() {
+		// returns array of key value pairs
+		// obj = { "2021-10": [activity], "2021-11": [activity, activity2], "2021-12": [activity] };
+		// Object.entries(obj); => [ [ "2021-10", [activity] ], [ "2021-11", [activity, activity2] ], [ "2021-12", [activity] ] ]
+		return Object.entries(
+			// reduce returns single value (in this case an object(activities) initialized with {})
+			this.activitiesArray.reduce((activities, activity) => {
+				const date = activity.date;
+				// if e.g {"2021-10": null} create new array => {"2021-10": []}
+				if (activities[date] == null) activities[date] = [];
+				// push to that array {"2021-10": [activity]} if date contains non empty array new object is passed to that array => {"2021-10": [activity1, activity2]}
+				activities[date].push(activity);
+				return activities;
+			}, {} as { [key: string]: Activity[] })
+		);
 	}
 
 	// gets data from api and stores them activities array

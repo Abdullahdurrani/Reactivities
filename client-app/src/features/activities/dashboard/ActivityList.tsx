@@ -1,61 +1,48 @@
-import { observer } from "mobx-react-lite";
-import React, { SyntheticEvent, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useStore } from "../../../app/stores/store";
+import { observer } from 'mobx-react-lite';
+import React, { Fragment } from 'react';
+import { CSVLink } from 'react-csv';
+import { useStore } from '../../../app/stores/store';
+import ActivityListItem from './ActivityListItem';
+import '../../../assets/styles/index.css';
 
 export default observer(function ActivityList() {
 	const { activityStore } = useStore();
-	const { deleteActivity, activitiesArray, loading } = activityStore;
-	// contains the name of the button clicked
-	const [target, setTarget] = useState("");
+	const { groupedActivities, activitiesArray } = activityStore;
 
-	function handleActivityDelete(e: SyntheticEvent<HTMLButtonElement>, id: string) {
-		setTarget(e.currentTarget.name);
-		deleteActivity(id);
-	}
+	const headers = [
+		{ label: 'ID', key: 'id' },
+		{ label: 'Title', key: 'title' },
+		{ label: 'Date', key: 'date' },
+		{ label: 'Description', key: 'description' },
+		{ label: 'Category', key: 'category' },
+		{ label: 'City', key: 'city' },
+		{ label: 'Venue', key: 'venue' },
+	];
+
+	const csvReport = {
+		filename: 'Activities.csv',
+		headers: headers,
+		data: activitiesArray,
+	};
 	return (
-		<div>
-			{activitiesArray.map((activity) => (
-				<div key={activity.id} className="card">
-					<h5 className="card-header">{activity.title}</h5>
-
-					<div className="card-body">
-						<p className="card-text">{activity.date}</p>
-						<h5 className="card-title">{activity.description}</h5>
-						<h6 className="card-title">{activity.city}</h6>
-
-						<div className="d-flex justify-content-between">
-							<h4>
-								{" "}
-								<span className="badge bg-secondary">{activity.category}</span>
-							</h4>
-							<div>
-								<NavLink to={`/activities/${activity.id}`}>
-									{/* onclick contains arrow function because as soon as button renders it will try to execute it without clicking. arrow func makes sure it only executes when it is clicked  */}
-									<button type="button" className="btn btn-primary me-2">
-										View
-									</button>
-								</NavLink>
-								<button
-									name={activity.id}
-									onClick={(e) => handleActivityDelete(e, activity.id)}
-									type="button"
-									className="btn btn-danger"
-								>
-									Delete
-									{loading && target === activity.id && (
-										<span
-											className="spinner-border spinner-border-sm ms-2"
-											role="status"
-											aria-hidden="true"
-										></span>
-									)}
-								</button>
-							</div>
-						</div>
+		<>
+			<div>
+				<button type='button' className='btn btn-success mb-4'>
+					<CSVLink {...csvReport} className='text-white csv'>
+						Export to CSV
+					</CSVLink>
+				</button>
+			</div>
+			{groupedActivities.map(([group, activities]) => (
+				<Fragment key={group}>
+					<h4 className='text-muted'>{group}</h4>
+					<div className='mb-4'>
+						{activities.map((activity) => (
+							<ActivityListItem key={activity.id} activity={activity} />
+						))}
 					</div>
-				</div>
+				</Fragment>
 			))}
-		</div>
+		</>
 	);
 });

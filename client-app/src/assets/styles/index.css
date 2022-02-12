@@ -1,0 +1,15 @@
+.csv {
+	text-decoration: none;
+}
+
+.navbar {
+	background-color: rgb(77, 66, 66);
+}
+
+body {
+	background-color: rgb(192, 224, 224);
+}
+
+.badge {
+	border: 1px solid;
+}

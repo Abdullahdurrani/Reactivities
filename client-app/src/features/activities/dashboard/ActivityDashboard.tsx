@@ -19,7 +19,6 @@ export default observer(function ActivityDashboard() {
 	return (
 		<div className='row'>
 			<div className='col-8'>
-				{/* contains View button which executes the handleSelectActivity function which in return sets the selectedActivity state */}
 				<ActivityList />
 			</div>
 			<div className='col-4'>

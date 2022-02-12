@@ -108,6 +108,15 @@ function ActivityForm() {
 				<div className='mb-3'>
 					<input
 						type='text'
+						placeholder='City'
+						className='form-control'
+						value={activity.city}
+						onChange={(e) => handleInput('city', e.target.value)}
+					/>
+				</div>
+				<div className='mb-3'>
+					<input
+						type='text'
 						placeholder='Venue'
 						className='form-control'
 						value={activity.venue}

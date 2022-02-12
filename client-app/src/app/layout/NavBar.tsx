@@ -5,7 +5,7 @@ import Logo from '../../assets/logo.png';
 export default function NavBar() {
 	return (
 		<div>
-			<nav className='navbar navbar-expand-lg navbar-dark bg-info '>
+			<nav className='navbar navbar-expand-lg  '>
 				<div className='container'>
 					<ul className='nav'>
 						<li className='nav-item ms-3'>
