@@ -3,7 +3,6 @@ import React, { Fragment } from 'react';
 import { CSVLink } from 'react-csv';
 import { useStore } from '../../../app/stores/store';
 import ActivityListItem from './ActivityListItem';
-import '../../../assets/styles/index.css';
 
 export default observer(function ActivityList() {
 	const { activityStore } = useStore();

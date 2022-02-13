@@ -1,12 +1,22 @@
-import { Link } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
+import Logo from '../../assets/logo.png';
 function HomePage() {
 	return (
-		<div className='container mt-5 p-5'>
-			<h4>Home Page</h4>
-			<h5>
-				Go to <Link to='/activities'>Activities</Link>
-			</h5>
+		<div className='home d-flex flex-column min-vh-100 justify-content-center'>
+			<div className='d-flex flex-row mb-3'>
+				<img src={Logo} alt='' className='home-img' />
+				<h1 className='home-header'>Reactivities</h1>
+			</div>
+			<div className='me-5 mb-2'>
+				<h4>Welcome to Reactivities</h4>
+			</div>
+			<div className='me-5'>
+				<NavLink to='/activities' className='home-nav'>
+					<button type='button' className='btn btn-outline-light home-btn'>
+						Take me to the Activities
+					</button>
+				</NavLink>
+			</div>
 		</div>
 	);
 }

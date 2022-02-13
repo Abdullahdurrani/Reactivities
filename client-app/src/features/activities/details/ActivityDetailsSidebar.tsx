@@ -1,3 +1,5 @@
+import { observer } from 'mobx-react-lite';
+
 function ActivityDetailsSidebar() {
 	return (
 		<div className='card'>
@@ -5,7 +7,7 @@ function ActivityDetailsSidebar() {
 				<li className='card-header text-white text-center bg-secondary'>3 People Going</li>
 				<li className='list-group-item'>
 					<span className='badge bg-danger host float-end'>Host</span>
-					<li className='d-flex flex-row'>
+					<span className='d-flex flex-row'>
 						<img className='sidebar-img w-25' src={require('../../../assets/user.png')} alt='' />
 
 						<span className='d-flex flex-column'>
@@ -16,9 +18,9 @@ function ActivityDetailsSidebar() {
 								Following
 							</button>
 						</span>
-					</li>{' '}
+					</span>
 					<hr />
-					<li className='d-flex flex-row'>
+					<span className='d-flex flex-row'>
 						<img className='sidebar-img w-25' src={require('../../../assets/user.png')} alt='' />
 						<span className='d-flex flex-column'>
 							<button type='button' className='sidebar-person btn btn-Link'>
@@ -28,19 +30,19 @@ function ActivityDetailsSidebar() {
 								Following
 							</button>
 						</span>
-					</li>{' '}
+					</span>
 					<hr />
-					<li className='d-flex flex-row'>
+					<span className='d-flex flex-row'>
 						<img className='sidebar-img w-25' src={require('../../../assets/user.png')} alt='' />
 						<span className='d-flex flex-column'>
 							<button type='button' className='sidebar-person btn btn-Link'>
 								Nigga
 							</button>
 						</span>
-					</li>
+					</span>
 				</li>
 			</ul>
 		</div>
 	);
 }
-export default ActivityDetailsSidebar;
+export default observer(ActivityDetailsSidebar);

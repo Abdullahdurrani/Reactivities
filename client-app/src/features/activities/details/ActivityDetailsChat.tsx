@@ -6,7 +6,7 @@ function ActivityDetailsChat() {
 			<ul className='list-group list-group-flush'>
 				<h5 className='card-header text-center bg-secondary text-white pe-5'>Chat</h5>
 				<li className='d-flex flex-column'>
-					<li className='list-group-item d-flex flex-row'>
+					<span className='list-group-item d-flex flex-row'>
 						<img className='card-img chat-img' src={require('../../../assets/user.png')} alt='' />
 						<span className='d-flex flex-column'>
 							<span className='pt-2'>
@@ -18,8 +18,8 @@ function ActivityDetailsChat() {
 								<button className='btn btn-link msg-reply'>Reply</button>
 							</span>
 						</span>
-					</li>
-					<li className='list-group-item d-flex flex-row'>
+					</span>
+					<span className='list-group-item d-flex flex-row'>
 						<img className='card-img chat-img' src={require('../../../assets/user.png')} alt='' />
 						<span className='d-flex flex-column'>
 							<span className='pt-2'>
@@ -31,11 +31,11 @@ function ActivityDetailsChat() {
 								<button className='btn btn-link msg-reply'>Reply</button>
 							</span>
 						</span>
-					</li>
-					<li>
+					</span>
+					<span>
 						<textarea className='form-control' id='exampleFormControlTextarea1' rows={3}></textarea>
 						<button className='btn btn-primary mt-2'>Add Reply</button>
-					</li>
+					</span>
 				</li>
 			</ul>
 		</div>

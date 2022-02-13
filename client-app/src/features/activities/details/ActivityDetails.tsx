@@ -21,7 +21,7 @@ function ActivityDetails() {
 	if (loadingInitial || !activity) return <LoadingComponent />;
 	return (
 		<div className='row'>
-			<div className='col-6 ms-5'>
+			<div className='col-6 ms-5 me-3'>
 				<ActivityDetailsHeader activity={activity} />
 				<ActivityDetailsInfo activity={activity} />
 				<ActivityDetailsChat />
