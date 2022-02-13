@@ -1,8 +1,12 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import { useStore } from '../../../app/stores/store';
+import ActivityDetailsChat from './ActivityDetailsChat';
+import ActivityDetailsHeader from './ActivityDetailsHeader';
+import ActivityDetailsInfo from './ActivityDetailsInfo';
+import ActivityDetailsSidebar from './ActivityDetailsSidebar';
 function ActivityDetails() {
 	const { activityStore } = useStore();
 	const { selectedActivity: activity, loadActivity, loadingInitial } = activityStore;
@@ -16,33 +20,14 @@ function ActivityDetails() {
 	// to remove the error of undefined
 	if (loadingInitial || !activity) return <LoadingComponent />;
 	return (
-		<div className='card' style={{ width: '24rem' }}>
-			<img
-				className='card-img-top'
-				src={require(`../../../assets/categoryImages/${activity.category}.jpg`)}
-				alt='image1'
-			/>
-			<div className='card-body'>
-				<h5 className='card-title'>{activity.title} </h5>
-				<p className='card-text'>{activity.date}</p>
-				<p className='card-text'>{activity.description}</p>
-				<p className='card-text'>
-					{activity.city}, <span>{activity.venue}</span>
-				</p>
-				<p className='card-text'>{activity.category}</p>
+		<div className='row'>
+			<div className='col-6 ms-5'>
+				<ActivityDetailsHeader activity={activity} />
+				<ActivityDetailsInfo activity={activity} />
+				<ActivityDetailsChat />
 			</div>
-			<div className='card-body d-flex'>
-				<NavLink to={`/manage/${activity.id}`}>
-					<button type='button' className='btn btn-primary me-2'>
-						Edit
-					</button>
-				</NavLink>
-
-				<NavLink to='/activities'>
-					<button type='button' className='btn btn-secondary'>
-						Cancel
-					</button>
-				</NavLink>
+			<div className='col-4'>
+				<ActivityDetailsSidebar />
 			</div>
 		</div>
 	);
