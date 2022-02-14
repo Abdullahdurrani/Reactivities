@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "cbhQINj17wFLfT7AQh+D3+v6qGXuagFge4Ns5U2E0oGPSojCEQK0eDnUplHRJjMQgHV0kjzmQbFCwT/pAXYLzQ==",
+  "dgSpecHash": "Gl99S6mO42Z3rSdir0fpUtelsxSOZLfD9zHSqmhSC4Of4GFOOanYgtwHvINlGzg+I+YOW29EZ52sKaQLkWrCWA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
+    "C:\\Users\\Abdullah\\.nuget\\packages\\fluentvalidation\\10.3.6\\fluentvalidation.10.3.6.nupkg.sha512",
+    "C:\\Users\\Abdullah\\.nuget\\packages\\fluentvalidation.aspnetcore\\10.3.6\\fluentvalidation.aspnetcore.10.3.6.nupkg.sha512",
+    "C:\\Users\\Abdullah\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\10.3.6\\fluentvalidation.dependencyinjectionextensions.10.3.6.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\mediatr\\10.0.1\\mediatr.10.0.1.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",

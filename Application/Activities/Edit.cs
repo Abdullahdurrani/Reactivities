@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Domain;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -14,6 +15,14 @@ namespace Application.Activities
         public class Command : IRequest
         {
             public Activity Activity { get; set; }
+        }
+
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Activity).SetValidator(new ActivityValidator());
+            }
         }
 
         public class Handler : IRequestHandler<Command>
@@ -32,7 +41,7 @@ namespace Application.Activities
 
                 // user may not update title so after ?? we assign the same value to it
                 // activity.Title = request.Activity.Title ?? activity.Title;
-                
+
                 // OR different approach using automapper
 
                 _mapper.Map(request.Activity, activity);

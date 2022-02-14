@@ -101,8 +101,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj"
+              "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
+                "projectPath": "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj"
               },
               "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Persistence\\Persistence.csproj": {
                 "projectPath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Persistence\\Persistence.csproj"
@@ -123,6 +123,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[11.0.0, )"
+            },
+            "FluentValidation.AspNetCore": {
+              "target": "Package",
+              "version": "[10.3.6, )"
             },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
@@ -148,14 +152,14 @@
         }
       }
     },
-    "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
+    "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj",
+        "projectUniqueName": "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj",
+        "projectPath": "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Abdullah\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\obj\\",
+        "outputPath": "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Abdullah\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -226,8 +230,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj"
+              "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
+                "projectPath": "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj"
               }
             }
           }

@@ -62,3 +62,6 @@ C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\MediatR.Contracts.dl
 C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\Abdullah\Desktop\Reactivities\API\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
