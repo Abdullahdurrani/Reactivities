@@ -18,7 +18,12 @@ export default function NavBar() {
 						</li>
 						<li className='nav-item'>
 							<NavLink to='/activities' className='nav-link text-white'>
-								Reactivities
+								Activities
+							</NavLink>
+						</li>
+						<li className='nav-item'>
+							<NavLink to='/errors' className='nav-link text-white'>
+								Errors
 							</NavLink>
 						</li>
 						<li className='nav-item ms-3'>

@@ -23,7 +23,7 @@ function ActivityListItem({ activity }: Props) {
 				</li>
 				<li className='list-group-item p-3'>
 					<span>
-						<img src={Clock} alt='' /> {activity.date}
+						<img src={Clock} alt='' className='pe-1' /> {activity.date}
 					</span>
 					<span className='p-4'>
 						<img src={Location} alt='' /> {activity.venue}

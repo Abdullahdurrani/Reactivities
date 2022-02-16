@@ -1114,8 +1114,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
-              "projectPath": "c:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj"
+            "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Abdullah\\Desktop\\Reactivities\\Domain\\Domain.csproj"
             }
           }
         }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Application.Core;
 using Domain;
 using FluentValidation;
 using MediatR;
@@ -11,7 +12,7 @@ namespace Application.Activities
 {
     public class Create
     {
-        public class Command : IRequest
+        public class Command : IRequest<Result<Unit>>
         {
             // Receive as parameter from API
             public Activity Activity { get; set; }
@@ -25,7 +26,7 @@ namespace Application.Activities
             }
         }
 
-        public class Handler : IRequestHandler<Command>
+        public class Handler : IRequestHandler<Command, Result<Unit>>
         {
             private readonly DataContext _context;
             public Handler(DataContext context)
@@ -33,16 +34,19 @@ namespace Application.Activities
                 _context = context;
             }
 
-            public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
             {
                 // AddAsync is not used because we are not accessing database
                 // Here Activity is only added in memory and tracked by EF Core
                 _context.Activities.Add(request.Activity);
 
-                await _context.SaveChangesAsync();
+                //SaveChanges contains the number of state entries written to the database so when it is 0 means result is false
+                var result = await _context.SaveChangesAsync() > 0;
+
+                if (!result) return Result<Unit>.Failure("Failed to create activity");
 
                 // this doesnt return anything, just tells API controller our request is finished
-                return Unit.Value;
+                return Result<Unit>.Success(Unit.Value);
             }
         }
     }
