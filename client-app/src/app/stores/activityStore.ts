@@ -8,7 +8,7 @@ export default class ActivityStore {
 	editMode = false;
 	loading = false;
 	// removes flickering on page load so initially set to true
-	loadingInitial = true;
+	loadingInitial = false;
 
 	constructor() {
 		makeAutoObservable(this);

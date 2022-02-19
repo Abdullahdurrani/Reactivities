@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react-lite';
+import { NavLink } from 'react-router-dom';
 import { Activity } from '../../../app/models/Activity';
 
 interface Props {
@@ -25,7 +26,9 @@ function ActivityDetailsHeader({ activity }: Props) {
 						<button className='btn btn-secondary'>Cancel Attendance</button>
 					</div>
 					<div>
-						<button className='btn btn-danger'>Manage Event</button>
+						<NavLink to={`/manage/${activity.id}`}>
+							<button className='btn btn-danger'>Manage Event</button>
+						</NavLink>
 					</div>
 				</div>
 			</div>
