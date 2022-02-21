@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import { Activity } from '../../../app/models/Activity';
 import { Location, Tag, Info, Calendar } from '../../../assets/Svg';
@@ -17,7 +18,7 @@ function ActivityDetailsInfo({ activity }: Props) {
 				</li>
 				<li className='list-group-item'>
 					<img src={Calendar} alt='' className='pe-3' />
-					{activity.date}
+					{format(activity.date!, 'dd MMM yyyy h:mm aa')}
 				</li>
 				<li className='list-group-item'>
 					<img src={Location} alt='' className='pe-3' />

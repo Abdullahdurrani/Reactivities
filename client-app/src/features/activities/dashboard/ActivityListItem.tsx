@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { NavLink } from 'react-router-dom';
 import { Activity } from '../../../app/models/Activity';
 import { Clock, Location } from '../../../assets/Svg';
@@ -23,7 +24,8 @@ function ActivityListItem({ activity }: Props) {
 				</li>
 				<li className='list-group-item p-3'>
 					<span>
-						<img src={Clock} alt='' className='pe-1' /> {activity.date}
+						<img src={Clock} alt='' className='pe-1' />{' '}
+						{format(activity.date!, 'dd MMM yyyy h:mm aa')}
 					</span>
 					<span className='p-4'>
 						<img src={Location} alt='' /> {activity.venue}

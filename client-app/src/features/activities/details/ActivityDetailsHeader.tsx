@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import { observer } from 'mobx-react-lite';
 import { NavLink } from 'react-router-dom';
 import { Activity } from '../../../app/models/Activity';
@@ -17,7 +18,7 @@ function ActivityDetailsHeader({ activity }: Props) {
 				/>
 				<div className='card-body det-caption'>
 					<h4 className='card-title'>{activity.title} </h4>
-					<p className='card-text'>{activity.date}</p>
+					<p className='card-text'>{format(activity.date!, 'dd MMM yyyy')}</p>
 					<p className='card-text'>Hosted by Bob</p>
 				</div>
 				<div className='card-body d-flex justify-content-between'>
