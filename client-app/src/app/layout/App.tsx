@@ -9,6 +9,7 @@ import NotFound from '../../features/errors/NotFound';
 import ServerError from '../../features/errors/ServerError';
 import TestErrors from '../../features/errors/TestError';
 import HomePage from '../../features/home/HomePage';
+import LoginForm from '../../features/users/LoginForm';
 import NavBar from './NavBar';
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
 								/>
 								<Route exact path='/errors' component={TestErrors} />
 								<Route exact path='/server-error' component={ServerError} />
+								<Route exact path='/login' component={LoginForm} />
 								<Route component={NotFound} />
 							</Switch>
 						</div>

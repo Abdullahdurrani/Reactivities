@@ -11,9 +11,9 @@ function HomePage() {
 				<h4>Welcome to Reactivities</h4>
 			</div>
 			<div className='me-5'>
-				<NavLink to='/activities' className='home-nav'>
+				<NavLink to='/login' className='home-nav'>
 					<button type='button' className='btn btn-outline-light home-btn'>
-						Take me to the Activities
+						Login
 					</button>
 				</NavLink>
 			</div>
